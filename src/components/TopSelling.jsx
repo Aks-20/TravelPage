@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const packages = [
   {
@@ -28,6 +29,22 @@ const packages = [
 ];
 
 const TourPackages = () => {
+  const [destinations, setDestinations] = useState([]);
+
+  useEffect(() => {
+    const fetchDestinations = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/destinations");
+        setDestinations(res.data);
+        console.log("Fetched destinations:", res.data); // Optional: to view in console
+      } catch (err) {
+        console.error("Error fetching destinations:", err);
+      }
+    };
+
+    fetchDestinations();
+  }, []);
+
   return (
     <section className="py-12 bg-white">
       <div className="text-center mb-10">
@@ -44,6 +61,7 @@ const TourPackages = () => {
               src={pkg.image}
               alt={pkg.title}
               className="h-48 w-full object-cover rounded-t-lg"
+              loading="lazy"
             />
             <div className="p-4 flex flex-col items-center space-y-4">
               <h3 className="text-teal-700 font-semibold text-center">{pkg.title}</h3>

@@ -39,6 +39,7 @@ const Testimonials = () => {
               src={testimonial.image}
               alt={testimonial.name}
               className="w-20 h-20 rounded-full object-cover mx-auto mb-4 border-4 border-white shadow-md"
+              loading='lazy'
             />
             <p className="text-gray-600 text-sm md:text-base italic mb-4 text-center">"{testimonial.text}"</p>
             <h4 className="text-lg font-semibold text-center text-gray-800">{testimonial.name}</h4>
